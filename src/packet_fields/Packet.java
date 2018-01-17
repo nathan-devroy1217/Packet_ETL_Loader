@@ -1,5 +1,7 @@
 package packet_fields;
 
+import java.sql.Timestamp;
+
 /**
  * Declaration of Packet interface
  * @author Nathan
@@ -7,14 +9,17 @@ package packet_fields;
  */
 public interface Packet {
 
-	/** ID field for Packet */
-	final String id = "NULL";
+	/** Setter for id */
+	void setId(int id);
+	
+	/** Getter for id */
+	int getId();
 	
 	/** Setter for accessDttm */
-	void setAccessDttm(String accessDttm);
+	void setAccessDttm(Timestamp accessDttm);
 	
 	/** Getter for accessDttm */
-	String getAccessDttm(); 
+	Timestamp getAccessDttm(); 
 	
 	/** Setter for fileKey */
 	void setFileKey(int fileKey);
