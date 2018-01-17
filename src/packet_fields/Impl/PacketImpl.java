@@ -3,126 +3,201 @@ import java.sql.Timestamp;
 
 import packet_fields.Packet;
 
+/**
+ * Packet class defines packet details transmitted 
+ * via home network
+ * @author Nathan
+ * @version 1/17/18
+ */
 public class PacketImpl implements Packet {
 
+	/** ID of the packet transmitted */
+	private int id;
+	
+	/** Date of packet transmission */
+	private Timestamp accessDttm;
+	
+	/** File key for packet */
+	private int fileKey;
+	
+	/** HTTP host ID for packet */
+	private String httpHost;
+	
+	/** HTTP URI designated to packet */
+	private String httpRequestUri;
+	
+	/** Source IP address */
+	private String srcIp;
+	
+	/** Destination IP address */
+	private String dstIp;
+	
+	/** Source TCP port */
+	private int tcpSrcPort;
+	
+	/** Destination TCP port */
+	private int tcpDstPort;
+	
+	/** URI of packet transmitted */
+	private String resolvedUri;
+	
+	/**
+	 * Setter for ID
+	 */
 	@Override
 	public void setId(int id) {
-		// TODO Auto-generated method stub
-
+		this.id = id;
 	}
 
+	/**
+	 * Getter for ID
+	 */
 	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
+	/**
+	 * Setter for accessDttm
+	 */
 	@Override
 	public void setAccessDttm(Timestamp accessDttm) {
-		// TODO Auto-generated method stub
-
+		this.accessDttm = accessDttm;
 	}
 
+	/**
+	 * Getter for accessDttm
+	 */
 	@Override
 	public Timestamp getAccessDttm() {
-		// TODO Auto-generated method stub
-		return null;
+		return accessDttm;
 	}
 
+	/**
+	 * Setter for fileKey
+	 */
 	@Override
 	public void setFileKey(int fileKey) {
-		// TODO Auto-generated method stub
-
+		this.fileKey = fileKey;
 	}
 
+	/**
+	 * Getter for fileKey
+	 */
 	@Override
 	public int getFileKey() {
-		// TODO Auto-generated method stub
-		return 0;
+		return fileKey;
 	}
 
+	/**
+	 * Setter for httpHost
+	 */
 	@Override
 	public void setHttpHost(String httpHost) {
-		// TODO Auto-generated method stub
-
+		this.httpHost = httpHost;
 	}
 
+	/**
+	 * Getter for httpHost
+	 */
 	@Override
 	public String getHttpHost() {
-		// TODO Auto-generated method stub
-		return null;
+		return httpHost;
 	}
 
+	/**
+	 * setter for httpRequestUri
+	 */
 	@Override
 	public void setHttpRequestUri(String httpRequestUri) {
-		// TODO Auto-generated method stub
-
+		this.httpRequestUri = httpRequestUri;
 	}
-
+	
+	/**
+	 * Getter for httpRequestUri
+	 */
 	@Override
 	public String getHttpRequestUri() {
-		// TODO Auto-generated method stub
-		return null;
+		return httpRequestUri;
 	}
 
+	/**
+	 * Setter for srcIp
+	 */
 	@Override
 	public void setSrcIp(String srcIp) {
-		// TODO Auto-generated method stub
-
+		this.srcIp = srcIp;
 	}
-
+	
+	/**
+	 * Getter for srcIp
+	 */
 	@Override
 	public String getSrcIp() {
-		// TODO Auto-generated method stub
-		return null;
+		return srcIp;
 	}
 
+	/**
+	 * Setter for dstIp
+	 */
 	@Override
 	public void setDstIp(String dstIp) {
-		// TODO Auto-generated method stub
-
+		this.dstIp = dstIp;
 	}
 
+	/**
+	 * Getter for dstIp
+	 */
 	@Override
 	public String getDstIp() {
-		// TODO Auto-generated method stub
-		return null;
+		return dstIp;
 	}
 
+	/**
+	 * Setter for tcpSrcPort
+	 */
 	@Override
 	public void setTcpSrcPort(int tcpSrcPort) {
-		// TODO Auto-generated method stub
-
+		this.tcpSrcPort = tcpSrcPort;
 	}
 
+	/**
+	 * Getter for tcpSrcPort
+	 */
 	@Override
 	public int getTcpSrcPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return tcpSrcPort;
 	}
 
+	/**
+	 * Setter for tcpDstPort
+	 */
 	@Override
 	public void setTcpDstPort(int tcpDstPort) {
-		// TODO Auto-generated method stub
-
+		this.tcpDstPort = tcpDstPort;
 	}
 
+	/**
+	 * Getter for tcpDstPort
+	 */
 	@Override
 	public int getTcpDstPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return tcpDstPort;
 	}
 
+	/**
+	 * Setter for resolvedUri
+	 */
 	@Override
 	public void setResolvedUri(String resolvedUri) {
-		// TODO Auto-generated method stub
-
+		this.resolvedUri = resolvedUri;
 	}
 
+	/**
+	 * Getter for resolvedUri
+	 */
 	@Override
 	public String getResolvedUri() {
-		// TODO Auto-generated method stub
-		return null;
+		return resolvedUri;
 	}
-
 }
