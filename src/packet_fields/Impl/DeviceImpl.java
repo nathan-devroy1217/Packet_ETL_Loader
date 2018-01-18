@@ -4,66 +4,105 @@ import java.sql.Timestamp;
 
 import packet_fields.Device;
 
+/**
+ * Device defines devices using the network
+ * @author Nathan
+ * @version 1/17/18
+ */
 public class DeviceImpl implements Device {
 
+	/** IP address of device */
+	private String ipAddress;
+	
+	/** Name of device */
+	private String deviceName;
+	
+	/** MAC address of device */
+	private String macAddress;
+	
+	/** Time device inserted into device table */
+	private Timestamp deviceInsrtDttm;
+	
+	/** Time device updated in device table */
+	private Timestamp deviceUpdtDttm;
+	
+	/**
+	 * Setter for ipAddress
+	 */
 	@Override
 	public void setIpAddress(String ipAddress) {
-		// TODO Auto-generated method stub
-
+		this.ipAddress = ipAddress;
 	}
 
+	/**
+	 * Getter for ipAddress
+	 */
 	@Override
 	public String getIpAddress() {
-		// TODO Auto-generated method stub
-		return null;
+		return ipAddress;
 	}
 
+	/**
+	 * Setter for deviceName
+	 */
 	@Override
 	public void setDeviceName(String deviceName) {
-		// TODO Auto-generated method stub
-
+		this.deviceName = deviceName;
 	}
 
+	/**
+	 * Getter for deviceName
+	 */
 	@Override
 	public String getDeviceName() {
-		// TODO Auto-generated method stub
-		return null;
+		return deviceName;
 	}
 
+	/**
+	 * Setter for macAddress
+	 */
 	@Override
 	public void setMacAddress(String macAddress) {
-		// TODO Auto-generated method stub
-
+		this.macAddress = macAddress;
 	}
 
+	/**
+	 * Getter for macAddress
+	 */
 	@Override
 	public String getMacAddress() {
-		// TODO Auto-generated method stub
-		return null;
+		return macAddress;
 	}
 
+	/**
+	 * Setter for deviceInsrtDttm
+	 */
 	@Override
 	public void setDeviceInsrtDttm(Timestamp deviceInsrtDttm) {
-		// TODO Auto-generated method stub
-
+		this.deviceInsrtDttm = deviceInsrtDttm;
 	}
 
+	/**
+	 * Getter for deviceInsrtDttm
+	 */
 	@Override
 	public Timestamp getDeviceInsrtDttm() {
-		// TODO Auto-generated method stub
-		return null;
+		return deviceInsrtDttm;
 	}
-
+	
+	/**
+	 * Setter for deviceUpdtDttm
+	 */
 	@Override
 	public void setDeviceUpdtDttm(Timestamp deviceUpdtDttm) {
-		// TODO Auto-generated method stub
-
+		this.deviceUpdtDttm = deviceUpdtDttm;
 	}
 
+	/**
+	 * Getter for deviceUpdtDttm
+	 */
 	@Override
 	public Timestamp getDeviceUpdtDttm() {
-		// TODO Auto-generated method stub
-		return null;
+		return deviceUpdtDttm;
 	}
-
 }

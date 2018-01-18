@@ -4,42 +4,67 @@ import java.sql.Timestamp;
 
 import packet_fields.Email_Client;
 
+/**
+ * EmailClient defines email recipients for packet analysis
+ * @author Nathan
+ * @version 1/17/18
+ */
 public class EmailClientImpl implements Email_Client {
 
+	/** Name of email client */
+	private String clientName;
+	
+	/** Email address of email client */
+	private String emailAddress;
+	
+	/** Time of last message */
+	private Timestamp lastMsg;
+	
+	/**
+	 * Setter for clientName
+	 */
 	@Override
 	public void setClientName(String clientName) {
-		// TODO Auto-generated method stub
-
+		this.clientName = clientName;
 	}
 
+	/**
+	 * Getter for clientName
+	 */
 	@Override
 	public String getClientName() {
-		// TODO Auto-generated method stub
-		return null;
+		return clientName;
 	}
 
+	/**
+	 * Setter for emailAddress
+	 */
 	@Override
 	public void setEmailAddress(String emailAddress) {
-		// TODO Auto-generated method stub
-
+		this.emailAddress = emailAddress;
 	}
 
+	/**
+	 * Getter for emailAddress
+	 */
 	@Override
 	public String getEmailAddress() {
-		// TODO Auto-generated method stub
-		return null;
+		return emailAddress;
 	}
 
+	/**
+	 * Setter for lastMsg
+	 */
 	@Override
 	public void setLastMsg(Timestamp lastMsg) {
-		// TODO Auto-generated method stub
-
+		this.lastMsg = lastMsg;
 	}
 
+	/**
+	 * Getter for lastMsg
+	 */
 	@Override
 	public Timestamp getLastMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		return lastMsg;
 	}
-
 }

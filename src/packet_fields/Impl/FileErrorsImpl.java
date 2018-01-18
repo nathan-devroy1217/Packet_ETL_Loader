@@ -4,54 +4,86 @@ import java.sql.Timestamp;
 
 import packet_fields.File_Errors;
 
+/**
+ * FileErrors class defines errors in file load
+ * @author Nathan
+ * @version 1/17/18
+ */
 public class FileErrorsImpl implements File_Errors {
 
+	/** File key for file */
+	private int fileKey;
+	
+	/** Date of file error insert */
+	private Timestamp insrtDttm;
+	
+	/** Date of file error update */
+	private Timestamp updtDttm;
+	
+	/** Error message delivered to console */
+	private String errorMsg;
+	
+	/**
+	 * Setter for fileKey
+	 */
 	@Override
 	public void setFileKey(int fileKey) {
-		// TODO Auto-generated method stub
-
+		this.fileKey = fileKey;
 	}
 
+	/**
+	 * Getter for fileKey
+	 */
 	@Override
 	public int getFileKey() {
-		// TODO Auto-generated method stub
-		return 0;
+		return fileKey;
 	}
 
+	/**
+	 * Setter for insrtDttm
+	 */
 	@Override
 	public void setInsrtDttm(Timestamp insrtDttm) {
-		// TODO Auto-generated method stub
-
+		this.insrtDttm = insrtDttm;
 	}
 
+	/**
+	 * Getter for insrtDttm
+	 */
 	@Override
 	public Timestamp getInsrtDttm() {
-		// TODO Auto-generated method stub
-		return null;
+		return insrtDttm;
 	}
 
+	/**
+	 * Setter for updtDttm
+	 */
 	@Override
 	public void setUpdtDttm(Timestamp updtDttm) {
-		// TODO Auto-generated method stub
-
+		this.updtDttm = updtDttm;
 	}
 
+	/**
+	 * Getter for updtDttm
+	 */
 	@Override
 	public Timestamp getUpdtDttm() {
-		// TODO Auto-generated method stub
-		return null;
+		return updtDttm;
 	}
 
+	/**
+	 * Setter for errorMsg
+	 */
 	@Override
 	public void setErrorMsg(String errorMsg) {
-		// TODO Auto-generated method stub
-
+		this.errorMsg = errorMsg;
 	}
 
+	/**
+	 * Getter for errorMsg
+	 */
 	@Override
 	public String getErrorMsg() {
-		// TODO Auto-generated method stub
-		return null;
+		return errorMsg;
 	}
-
 }

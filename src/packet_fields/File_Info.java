@@ -24,9 +24,22 @@ public interface File_Info {
 	/** Getter for updtDttm */
 	Timestamp getUpdtDttm();
 	
-	/** Setter for errorMsg */
-	void setErrorMsg(String errorMsg);
+	/** Setter for fileStatus */
+	void setFileStatus(int fileStatus);
 	
-	/** Getter for errorMsg */
-	String getErrorMsg();
+	/** Getter for fileStatus */
+	int fileStatus();
+
+	/** Setter for filePath */
+	void setFilePath(String filePath);
+	
+	/** Getter for filePath */
+	String getFilePath();
+	
+	/** Setter for fileName */
+	void setFileName(String fileName);
+	
+	/** Getter for fileName */
+	String getFileName();
+
 }
