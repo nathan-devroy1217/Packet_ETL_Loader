@@ -115,10 +115,13 @@ public class FileInfoImpl implements File_Info {
 					HomeNetworkConstants.user, HomeNetworkConstants.password);
 			Statement stmt = conn.createStatement();
 			// Need to update SQL statement
-			String sql = "select file_key from file_info where file_name=\"" + this.getFileName() + "\";";
+			String sql = "select file_key from file_info where file_name=\"" + this.getFileName() + "\" and insert_dttm=" 
+			+ File_Info.insrtDttm + ";";
 			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
-			value = rs.getRow();
+			while(rs.next()) {
+				value = rs.getInt("file_key");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

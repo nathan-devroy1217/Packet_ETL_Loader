@@ -11,7 +11,6 @@ public class Driver {
 	public static void main(String[] args) {
 		PacketInsertTest test = new PacketInsertTest();
 		FileKeyTest fKTest = new FileKeyTest();
-		System.out.println("Hey");
 		//*********************************
 		//Uncomment to initiate test persistence cases
 		//*********************************
@@ -19,12 +18,12 @@ public class Driver {
 		//test.persistToEmailClientDataTest();
 		//test.persistToFileErrorsTest();
 		//test.persistToFileInfoTest();
-		test.persistToPacketTest();
+		//test.persistToPacketTest();
 		
 		//*********************************
 		//Uncomment to initiate file key test case
 		//*********************************
-		//fKTest.checkFileKey();
+		fKTest.checkFileKey();
 	}
 
 }
