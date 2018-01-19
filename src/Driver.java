@@ -1,3 +1,4 @@
+import Tests.FileKeyTest;
 import Tests.PacketInsertTest;
 
 /**
@@ -9,15 +10,22 @@ public class Driver {
 
 	public static void main(String[] args) {
 		PacketInsertTest test = new PacketInsertTest();
+		FileKeyTest fKTest = new FileKeyTest();
+
 		
 		//*********************************
-		//Uncomment to initiate test cases
+		//Uncomment to initiate test persistence cases
 		//*********************************
 		//test.persistToDeviceDataTest();
 		//test.persistToEmailClientDataTest();
 		//test.persistToFileErrorsTest();
 		//test.persistToFileInfoTest();
 		//test.persistToPacketTest();
+		
+		//*********************************
+		//Uncomment to initiate file key test case
+		//*********************************
+		//fKTest.checkFileKey();
 	}
 
 }
