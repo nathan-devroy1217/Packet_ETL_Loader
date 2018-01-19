@@ -1,7 +1,5 @@
 package packet_fields;
 
-import java.sql.Timestamp;
-
 /**
  * Declaration of Device Interface
  * @author Nathan
@@ -11,6 +9,12 @@ public interface Device {
 	
 	/** Device Id variable */
 	final static String deviceId = "NULL";
+	
+	/** Insert time */
+	final static String deviceInsrtDttm = "CURRENT_TIMESTAMP";
+	
+	/** Update time */
+	final static String deviceUpdtDttm = "CURRENT_TIMESTAMP";
 	
 	/** Setter for ipAddress */
 	void setIpAddress(String ipAddress);
@@ -29,16 +33,5 @@ public interface Device {
 	
 	/** Getter for macAddress */
 	String getMacAddress();
-	
-	/** Setter for deviceInsrtDttm */
-	void setDeviceInsrtDttm(Timestamp deviceInsrtDttm);
-	
-	/** Getter for deviceInsrtDttm */
-	Timestamp getDeviceInsrtDttm();
-	
-	/** Setter for deviceUpdtDttm */
-	void setDeviceUpdtDttm(Timestamp deviceUpdtDttm);
-	
-	/** Getter for deviceUpdtDttm */
-	Timestamp getDeviceUpdtDttm();
+
 }

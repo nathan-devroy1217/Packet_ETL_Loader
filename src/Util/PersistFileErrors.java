@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import packet_fields.File_Errors;
 import packet_fields.Impl.FileErrorsImpl;
 
 /**
@@ -52,8 +53,9 @@ public class PersistFileErrors extends PersistAbstract {
 			for (FileErrorsImpl item : data) {
 				updtStmt = conn.createStatement();
 				String sql = "insert into file_errors(file_key,insert_dttm,update_dttm,error_msg)"
-						+ " values(" + item.getFileKey() + "," + item.getInsrtDttm() + "," + 
-						item.getUpdtDttm() + "," + item.getErrorMsg() + ")";
+						+ " values(" + item.getFileKey() + "," + File_Errors.insrtDttm + "," + 
+						File_Errors.updtDttm + ",\"" + item.getErrorMsg() + "\");";
+				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
 			}
 		} catch (Exception e) {

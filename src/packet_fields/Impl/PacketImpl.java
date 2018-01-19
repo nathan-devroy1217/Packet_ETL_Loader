@@ -1,5 +1,4 @@
 package packet_fields.Impl;
-import java.sql.Timestamp;
 
 import packet_fields.Packet;
 
@@ -13,9 +12,6 @@ public class PacketImpl implements Packet {
 
 	/** ID of the packet transmitted */
 	private int id;
-	
-	/** Date of packet transmission */
-	private Timestamp accessDttm;
 	
 	/** File key for packet */
 	private int fileKey;
@@ -55,22 +51,6 @@ public class PacketImpl implements Packet {
 	@Override
 	public int getId() {
 		return id;
-	}
-
-	/**
-	 * Setter for accessDttm
-	 */
-	@Override
-	public void setAccessDttm(Timestamp accessDttm) {
-		this.accessDttm = accessDttm;
-	}
-
-	/**
-	 * Getter for accessDttm
-	 */
-	@Override
-	public Timestamp getAccessDttm() {
-		return accessDttm;
 	}
 
 	/**

@@ -1,7 +1,5 @@
 package packet_fields;
 
-import java.sql.Timestamp;
-
 /**
  * Declaration of Email_Client Interface
  * @author Nathan
@@ -11,6 +9,9 @@ public interface Email_Client {
 	
 	/** ID of the client */
 	final String id = "NULL";
+	
+	/** Last sent message */
+	final String lastMsg = "CURRENT_TIMESTAMP";
 	
 	/** Setter for clientName */
 	void setClientName(String clientName);
@@ -24,9 +25,9 @@ public interface Email_Client {
 	/** Getter for emailAddress */
 	String getEmailAddress();
 	
-	/** Setter for lastMsg */
-	void setLastMsg(Timestamp lastMsg);
+	/** Setter for isActive */
+	void setIsActive(boolean isActive);
 	
-	/** Getter for lastMsg */
-	Timestamp getLastMsg();
+	/** Getter for isActive */
+	boolean getIsActive();
 }

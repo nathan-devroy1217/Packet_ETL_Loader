@@ -2,7 +2,6 @@ package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -55,9 +54,10 @@ public class PersistDevice extends PersistAbstract {
 				updtStmt = conn.createStatement();		
 				String sql = "insert into device(device_id,ip_address,device_name,mac_address,"
 						+ "device_insrt_dttm,device_updt_dttm) values(" + Device.deviceId + 
-						"," + item.getIpAddress() + "," + item.getDeviceName() + ","
-						+ item.getMacAddress() + "," + item.getDeviceInsrtDttm() +
-						"," + item.getDeviceUpdtDttm() + ")";
+						",\"" + item.getIpAddress() + "\",\"" + item.getDeviceName() + "\",\""
+						+ item.getMacAddress() + "\"," + Device.deviceInsrtDttm +
+						"," + Device.deviceUpdtDttm + ");";
+				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
 			}
 		} catch(Exception e) {

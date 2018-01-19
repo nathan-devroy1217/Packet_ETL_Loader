@@ -55,9 +55,10 @@ public class PersistFileInfo extends PersistAbstract {
 				// Need to update SQL statement
 				String sql = "insert into file_info(file_key, insert_dttm, update_dttm,"
 						+ "file_status,file_path,file_name) values(" + File_Info.file_key +
-						"," + item.getInsrtDttm() + "," + item.getUpdtDttm() + 
-						"," + item.getFileStatus() + "," + item.getFilePath() +
-						"," + item.getFileName() + ")";
+						"," + File_Info.insrtDttm + "," + File_Info.updtDttm + 
+						",\"" + item.getFileStatus() + "\",\"" + item.getFilePath() +
+						"\",\"" + item.getFileName() + "\")";
+				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
 			}
 		} catch (Exception e) {

@@ -1,6 +1,5 @@
 package packet_fields.Impl;
 
-import java.sql.Timestamp;
 
 import packet_fields.File_Info;
 
@@ -12,12 +11,6 @@ import packet_fields.File_Info;
  */
 public class FileInfoImpl implements File_Info {
 
-	/** Time of insert into file_info table */
-	private Timestamp insrtDttm;
-	
-	/** Time of update of file_info table */
-	private Timestamp updtDttm;
-
 	/** Status of file during load */
 	private int fileStatus;
 	
@@ -26,38 +19,6 @@ public class FileInfoImpl implements File_Info {
 	
 	/** Name of file */
 	private String fileName;
-	
-	/**
-	 * Setter for insrtDttm
-	 */
-	@Override
-	public void setInsrtDttm(Timestamp insrtDttm) {
-		this.insrtDttm = insrtDttm;
-	}
-
-	/**
-	 * Getter for insrtDttm
-	 */
-	@Override
-	public Timestamp getInsrtDttm() {
-		return insrtDttm;
-	}
-
-	/**
-	 * Setter for updtDttm
-	 */
-	@Override
-	public void setUpdtDttm(Timestamp updtDttm) {
-		this.updtDttm = updtDttm;
-	}
-
-	/**
-	 * Getter for updtDttm
-	 */
-	@Override
-	public Timestamp getUpdtDttm() {
-		return updtDttm;
-	}
 
 	/**
 	 * Setter for fileStatus

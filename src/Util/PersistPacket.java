@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import packet_fields.Packet;
 import packet_fields.Impl.PacketImpl;
 
 /**
@@ -52,11 +53,12 @@ public class PersistPacket extends PersistAbstract {
 			for (PacketImpl item : data) {
 				updtStmt = conn.createStatement();
 				String sql = "insert into packet(id,access_dttm,file_key,http_host,"
-						+ "http_request_uri,src_ip,dst_ip,tsp_src_port,tcp_dst_port,resolved_url) "
-						+ "values(" + item.getId() + "," + item.getAccessDttm() +
-						"," + item.getFileKey() + "," + item.getHttpHost() + "," + item.getHttpRequestUri() +
-						"," + item.getSrcIp() + "," + item.getDstIp() + "," + item.getTcpSrcPort() +
-						"," + item.getTcpDstPort() + "," + item.getResolvedUri() + ")";
+						+ "http_request_uri,src_ip,dst_ip,tcp_src_port,tcp_dst_port,resolved_url) "
+						+ "values(" + item.getId() + "," + Packet.accessDttm +
+						"," + item.getFileKey() + ",\"" + item.getHttpHost() + "\",\"" + item.getHttpRequestUri() +
+						"\",\"" + item.getSrcIp() + "\",\"" + item.getDstIp() + "\"," + item.getTcpSrcPort() +
+						"," + item.getTcpDstPort() + ",\"" + item.getResolvedUri() + "\");";
+				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
 			}
 		} catch (Exception e) {

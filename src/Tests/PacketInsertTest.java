@@ -1,8 +1,5 @@
 package Tests;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import Util.PersistDevice;
@@ -37,7 +34,6 @@ public class PacketInsertTest {
 		ArrayList<PacketImpl> list = new ArrayList<PacketImpl>();
 		PacketImpl packet = new PacketImpl();
 		packet.setId(2);
-		packet.setAccessDttm(Timestamp.valueOf("2018-05-03 08:34:00.324"));
 		packet.setFileKey(2);
 		packet.setHttpHost("www.netflix.com");
 		packet.setHttpRequestUri("http://www.hulu.com");
@@ -58,8 +54,6 @@ public class PacketInsertTest {
 	public void persistToFileInfoTest() {
 		ArrayList<FileInfoImpl> list = new ArrayList<FileInfoImpl>();
 		FileInfoImpl fileInfo = new FileInfoImpl();
-		fileInfo.setInsrtDttm(Timestamp.valueOf("2018-05-03 08:34:00.324"));
-		fileInfo.setUpdtDttm(Timestamp.valueOf("2018-05-03 08:34:00.324"));
 		fileInfo.setFileStatus(2);
 		fileInfo.setFilePath("/home/pi/files/");
 		fileInfo.setFileName("testFile.dat");
@@ -75,9 +69,9 @@ public class PacketInsertTest {
 	public void persistToEmailClientDataTest() {
 		ArrayList<EmailClientImpl> list = new ArrayList<EmailClientImpl>();
 		EmailClientImpl client = new EmailClientImpl();
-		client.setClientName("Nathan");
-		client.setEmailAddress("nrdevroy1217@gmail.com");
-		client.setLastMsg(Timestamp.valueOf("2018-05-01 09:34:00.324"));
+		client.setClientName("Charles");
+		client.setEmailAddress("charlesjohnson@gmail.com");
+		client.setIsActive(true);
 		
 		list.add(client);
 		PersistEmailClient pec = new PersistEmailClient(list);
@@ -88,13 +82,9 @@ public class PacketInsertTest {
 	 * Persist data to file errors table
 	 */
 	public void persistToFileErrorsTest() {
-		//fileErrorsData = "12345*Jan 15, 2018 14:42:04.872754000 CST*Jan 15, 2018 14:42:04.872754000 CST*Error: No such file*";
-		
 		ArrayList<FileErrorsImpl> list = new ArrayList<FileErrorsImpl>();
 		FileErrorsImpl fileErrors = new FileErrorsImpl();
 		fileErrors.setFileKey(1);
-		fileErrors.setInsrtDttm(Timestamp.valueOf("2018-01-01 02:02:00.324"));
-		fileErrors.setUpdtDttm(Timestamp.valueOf("2018-01-01 02:02:00.324"));
 		fileErrors.setErrorMsg("Error: Bad Insert");
 		
 		list.add(fileErrors);
@@ -111,8 +101,6 @@ public class PacketInsertTest {
 		device.setIpAddress("192.168.1.25");
 		device.setDeviceName("Frank's Computer");
 		device.setMacAddress("mo:34:23:21:221:12");
-		device.setDeviceInsrtDttm(Timestamp.valueOf("2018-01-01 02:02:00.324"));
-		device.setDeviceUpdtDttm(Timestamp.valueOf("2018-01-03 02:09:00.324"));
 		
 		list.add(device);
 		PersistDevice pd = new PersistDevice(list);

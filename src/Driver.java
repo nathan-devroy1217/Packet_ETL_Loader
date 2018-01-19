@@ -9,7 +9,15 @@ public class Driver {
 
 	public static void main(String[] args) {
 		PacketInsertTest test = new PacketInsertTest();
-		test.persistToDeviceDataTest();
+		
+		//*********************************
+		//Uncomment to initiate test cases
+		//*********************************
+		//test.persistToDeviceDataTest();
+		//test.persistToEmailClientDataTest();
+		//test.persistToFileErrorsTest();
+		//test.persistToFileInfoTest();
+		//test.persistToPacketTest();
 	}
 
 }

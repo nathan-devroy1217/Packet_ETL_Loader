@@ -1,7 +1,5 @@
 package packet_fields.Impl;
 
-import java.sql.Timestamp;
-
 import packet_fields.Device;
 
 /**
@@ -19,13 +17,7 @@ public class DeviceImpl implements Device {
 	
 	/** MAC address of device */
 	private String macAddress;
-	
-	/** Time device inserted into device table */
-	private Timestamp deviceInsrtDttm;
-	
-	/** Time device updated in device table */
-	private Timestamp deviceUpdtDttm;
-	
+		
 	/**
 	 * Setter for ipAddress
 	 */
@@ -72,37 +64,5 @@ public class DeviceImpl implements Device {
 	@Override
 	public String getMacAddress() {
 		return macAddress;
-	}
-
-	/**
-	 * Setter for deviceInsrtDttm
-	 */
-	@Override
-	public void setDeviceInsrtDttm(Timestamp deviceInsrtDttm) {
-		this.deviceInsrtDttm = deviceInsrtDttm;
-	}
-
-	/**
-	 * Getter for deviceInsrtDttm
-	 */
-	@Override
-	public Timestamp getDeviceInsrtDttm() {
-		return deviceInsrtDttm;
-	}
-	
-	/**
-	 * Setter for deviceUpdtDttm
-	 */
-	@Override
-	public void setDeviceUpdtDttm(Timestamp deviceUpdtDttm) {
-		this.deviceUpdtDttm = deviceUpdtDttm;
-	}
-
-	/**
-	 * Getter for deviceUpdtDttm
-	 */
-	@Override
-	public Timestamp getDeviceUpdtDttm() {
-		return deviceUpdtDttm;
 	}
 }

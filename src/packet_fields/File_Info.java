@@ -1,7 +1,5 @@
 package packet_fields;
 
-import java.sql.Timestamp;
-
 /**
  * Declaration of File_Info Interface
  * @author Nathan
@@ -12,17 +10,11 @@ public interface File_Info {
 	/** Value of fileKey */
 	final String file_key = "NULL";
 	
-	/** Setter for insrtDttm */
-	void setInsrtDttm(Timestamp insrtDttm);
+	/** Last insert */
+	final String insrtDttm = "CURRENT_TIMESTAMP";
 	
-	/** Getter for insrtDttm */
-	Timestamp getInsrtDttm();
-	
-	/** Setter for updtDttm */
-	void setUpdtDttm(Timestamp updtDttm);
-	
-	/** Getter for updtDttm */
-	Timestamp getUpdtDttm();
+	/** Last update */
+	final String updtDttm = "CURRENT_TIMESTAMP";
 	
 	/** Setter for fileStatus */
 	void setFileStatus(int fileStatus);

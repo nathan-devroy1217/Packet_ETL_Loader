@@ -1,6 +1,5 @@
 package packet_fields.Impl;
 
-import java.sql.Timestamp;
 
 import packet_fields.File_Errors;
 
@@ -13,12 +12,6 @@ public class FileErrorsImpl implements File_Errors {
 
 	/** File key for file */
 	private int fileKey;
-	
-	/** Date of file error insert */
-	private Timestamp insrtDttm;
-	
-	/** Date of file error update */
-	private Timestamp updtDttm;
 	
 	/** Error message delivered to console */
 	private String errorMsg;
@@ -37,38 +30,6 @@ public class FileErrorsImpl implements File_Errors {
 	@Override
 	public int getFileKey() {
 		return fileKey;
-	}
-
-	/**
-	 * Setter for insrtDttm
-	 */
-	@Override
-	public void setInsrtDttm(Timestamp insrtDttm) {
-		this.insrtDttm = insrtDttm;
-	}
-
-	/**
-	 * Getter for insrtDttm
-	 */
-	@Override
-	public Timestamp getInsrtDttm() {
-		return insrtDttm;
-	}
-
-	/**
-	 * Setter for updtDttm
-	 */
-	@Override
-	public void setUpdtDttm(Timestamp updtDttm) {
-		this.updtDttm = updtDttm;
-	}
-
-	/**
-	 * Getter for updtDttm
-	 */
-	@Override
-	public Timestamp getUpdtDttm() {
-		return updtDttm;
 	}
 
 	/**

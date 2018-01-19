@@ -1,6 +1,5 @@
 package packet_fields.Impl;
 
-import java.sql.Timestamp;
 
 import packet_fields.Email_Client;
 
@@ -16,9 +15,9 @@ public class EmailClientImpl implements Email_Client {
 	
 	/** Email address of email client */
 	private String emailAddress;
-	
-	/** Time of last message */
-	private Timestamp lastMsg;
+
+	/** Whether client is active in system */
+	private boolean isActive;
 	
 	/**
 	 * Setter for clientName
@@ -52,19 +51,13 @@ public class EmailClientImpl implements Email_Client {
 		return emailAddress;
 	}
 
-	/**
-	 * Setter for lastMsg
-	 */
 	@Override
-	public void setLastMsg(Timestamp lastMsg) {
-		this.lastMsg = lastMsg;
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
-	/**
-	 * Getter for lastMsg
-	 */
 	@Override
-	public Timestamp getLastMsg() {
-		return lastMsg;
+	public boolean getIsActive() {
+		return isActive;
 	}
 }

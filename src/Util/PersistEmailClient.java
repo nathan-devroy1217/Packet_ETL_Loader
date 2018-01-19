@@ -52,9 +52,11 @@ public class PersistEmailClient extends PersistAbstract {
 			conn = DriverManager.getConnection(url, user, password);
 			for(EmailClientImpl item : data) {
 				updtStmt = conn.createStatement();
-				String sql = "insert into email_client(id,client_name,email_addr,last_msg)"
-						+ " values(" + Email_Client.id + "," + item.getClientName() + ","
-						+ item.getEmailAddress() + "," + item.getLastMsg() + ")";
+				String sql = "insert into email_client(id,client_name,email_addr,last_msg,is_active)"
+						+ " values(" + Email_Client.id + ",\"" + item.getClientName() + "\",\""
+						+ item.getEmailAddress() + "\"," + Email_Client.lastMsg + "," + item.getIsActive() 
+						+ ");";
+				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
 			}
 		} catch(Exception e) {

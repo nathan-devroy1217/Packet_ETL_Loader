@@ -1,7 +1,5 @@
 package packet_fields;
 
-import java.sql.Timestamp;
-
 /**
  * Interface Declaration for File_Errors
  * @author Nathan
@@ -9,23 +7,17 @@ import java.sql.Timestamp;
  */
 public interface File_Errors {
 
+	/** Last insert */
+	final String insrtDttm = "CURRENT_TIMESTAMP";
+	
+	/** Last update */
+	final String updtDttm = "CURRENT_TIMESTAMP";
+	
 	/** Setter for fileKey */
 	void setFileKey(int fileKey);
 	
 	/** Getter for fileKey */
 	int getFileKey();
-	
-	/** Setter for insrtDttm */
-	void setInsrtDttm(Timestamp insrtDttm);
-	
-	/** Getter for insrtDttm */
-	Timestamp getInsrtDttm();
-	
-	/** Setter for updtDttm */
-	void setUpdtDttm(Timestamp updtDttm);
-	
-	/** Getter for updtDttm */
-	Timestamp getUpdtDttm();
 	
 	/** Setter for errorMsg */
 	void setErrorMsg(String errorMsg);
