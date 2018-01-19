@@ -14,7 +14,7 @@ import packet_fields.Impl.EmailClientImpl;
  * @author Nathan
  * @version 1/18/18
  */
-public class PersistEmailClient extends PersistAbstract {
+public class PersistEmailClient {
 	
 	/** JDBC connection string */
 	private final String url = HomeNetworkConstants.url;

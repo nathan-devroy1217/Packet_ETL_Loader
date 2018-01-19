@@ -14,7 +14,7 @@ import packet_fields.Impl.FileInfoImpl;
  * @author Nathan
  * @version 1/18/18
  */
-public class PersistFileInfo extends PersistAbstract {
+public class PersistFileInfo {
 
 	/** JDBC connection string */
 	private final String url = HomeNetworkConstants.url;

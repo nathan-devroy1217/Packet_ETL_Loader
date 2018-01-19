@@ -9,9 +9,6 @@ import packet_fields.Packet;
  * @version 1/17/18
  */
 public class PacketImpl implements Packet {
-
-	/** ID of the packet transmitted */
-	private int id;
 	
 	/** File key for packet */
 	private int fileKey;
@@ -37,22 +34,6 @@ public class PacketImpl implements Packet {
 	/** URI of packet transmitted */
 	private String resolvedUri;
 	
-	/**
-	 * Setter for ID
-	 */
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * Getter for ID
-	 */
-	@Override
-	public int getId() {
-		return id;
-	}
-
 	/**
 	 * Setter for fileKey
 	 */

@@ -10,11 +10,8 @@ public interface Packet {
 	/** Packet access time */
 	final String accessDttm = "CURRENT_TIMESTAMP";
 	
-	/** Setter for id */
-	void setId(int id);
-	
-	/** Getter for id */
-	int getId();
+	/** Id of packet */
+	final String id = "NULL";
 	
 	/** Setter for fileKey */
 	void setFileKey(int fileKey);

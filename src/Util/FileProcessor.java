@@ -30,6 +30,7 @@ public class FileProcessor {
 	 */
 	public FileProcessor(FileInbound fileInb) {
 		file = fileInb.getFile();
+		setInb(fileInb);
 		String line = null;
 	}
 	
@@ -37,11 +38,12 @@ public class FileProcessor {
 	 * Processes file along with inbound processing
 	 */
 	public void processFile() {
+		BufferedReader bufferedReader = null;
 		try {
 			//Start by setting file status as "in processing"
 			inb.updateFileProcessing();
 			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			bufferedReader = new BufferedReader(fileReader);
 			
 			//Need to continue here. Read file and spit out.
 			//Maybe start with reading and validating data set,
@@ -53,6 +55,7 @@ public class FileProcessor {
 			 * 
 			 */			
 			inb.updateFileSuccess();
+			bufferedReader.close();
 		} catch(FileNotFoundException e) {
 			//Add error to file_errors table
 			fileErrors = new PersistFileErrors(inb);

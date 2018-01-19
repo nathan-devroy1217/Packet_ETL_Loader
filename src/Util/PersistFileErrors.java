@@ -14,7 +14,7 @@ import packet_fields.Impl.FileErrorsImpl;
  * @author Nathan
  * @version 1/18/18
  */
-public class PersistFileErrors extends PersistAbstract {
+public class PersistFileErrors {
 
 	/** JDBC connection string */
 	private final String url = HomeNetworkConstants.url;

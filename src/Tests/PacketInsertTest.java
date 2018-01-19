@@ -33,7 +33,6 @@ public class PacketInsertTest {
 	public void persistToPacketTest() {
 		ArrayList<PacketImpl> list = new ArrayList<PacketImpl>();
 		PacketImpl packet = new PacketImpl();
-		packet.setId(2);
 		packet.setFileKey(2);
 		packet.setHttpHost("www.netflix.com");
 		packet.setHttpRequestUri("http://www.hulu.com");

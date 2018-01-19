@@ -14,7 +14,7 @@ import packet_fields.Impl.DeviceImpl;
  * @author Nathan
  * @version 1/18/18
  */
-public class PersistDevice extends PersistAbstract {
+public class PersistDevice {
 
 	/** JDBC connection string */
 	private final String url = HomeNetworkConstants.url;

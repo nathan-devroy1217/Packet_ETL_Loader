@@ -11,22 +11,22 @@ import packet_fields.Impl.PacketImpl;
 
 /**
  * Persistence process for Packet
- * @author ndevroy
- *
+ * @author Nathan
+ * @version 1/19/18
  */
-public class PersistPacket extends PersistAbstract {
+public class PersistPacket {
 
 	/** JDBC connection string */
-	private final String url = super.url;
+	private final String url = HomeNetworkConstants.url;
 
 	/** Insert statement to DB */
 	private Statement updtStmt = null;
 
 	/** User name for DB connection */
-	private final String user = super.user;
+	private final String user = HomeNetworkConstants.user;
 
 	/** Password for DB connection */
-	private final String password = super.password;
+	private final String password = HomeNetworkConstants.password;
 
 	/** DB connection */
 	private Connection conn = null;
@@ -54,7 +54,7 @@ public class PersistPacket extends PersistAbstract {
 				updtStmt = conn.createStatement();
 				String sql = "insert into packet(id,access_dttm,file_key,http_host,"
 						+ "http_request_uri,src_ip,dst_ip,tcp_src_port,tcp_dst_port,resolved_url) "
-						+ "values(" + item.getId() + "," + Packet.accessDttm +
+						+ "values(" + Packet.id + "," + Packet.accessDttm +
 						"," + item.getFileKey() + ",\"" + item.getHttpHost() + "\",\"" + item.getHttpRequestUri() +
 						"\",\"" + item.getSrcIp() + "\",\"" + item.getDstIp() + "\"," + item.getTcpSrcPort() +
 						"," + item.getTcpDstPort() + ",\"" + item.getResolvedUri() + "\");";
