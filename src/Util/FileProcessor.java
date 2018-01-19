@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import packet_fields.Impl.FileErrorsImpl;
-
 /**
  * FileProcessor takes file input,
  * creates objects, and routes to persistence
@@ -19,7 +17,11 @@ public class FileProcessor {
 	/** File being read by processor */
 	private File file;
 		
+	/** FileErrors object to invoke and persist error cases */
 	private PersistFileErrors fileErrors;
+	
+	/** Line denotes each line in file */
+	private String line;
 	
 	/** FileInbound object containing file info and file itself */
 	private FileInbound inb;
@@ -31,7 +33,7 @@ public class FileProcessor {
 	public FileProcessor(FileInbound fileInb) {
 		file = fileInb.getFile();
 		setInb(fileInb);
-		String line = null;
+		line = null;
 	}
 	
 	/**
@@ -45,15 +47,10 @@ public class FileProcessor {
 			FileReader fileReader = new FileReader(file);
 			bufferedReader = new BufferedReader(fileReader);
 			
-			//Need to continue here. Read file and spit out.
-			//Maybe start with reading and validating data set,
-			//...then populating to DB
-			/*
-			 * 
-			 * 
-			 * 
-			 * 
-			 */			
+			while((line = bufferedReader.readLine()) != null) {
+				PacketProcessor pp = new PacketProcessor(inb, line.toString());
+				pp.processPacket();
+			}
 			inb.updateFileSuccess();
 			bufferedReader.close();
 		} catch(FileNotFoundException e) {
