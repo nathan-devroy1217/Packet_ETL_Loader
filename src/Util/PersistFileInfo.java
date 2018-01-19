@@ -1,4 +1,4 @@
-package Util.Impl;
+package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,14 +6,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import packet_fields.Impl.PacketImpl;
+import packet_fields.File_Info;
+import packet_fields.Impl.FileInfoImpl;
 
 /**
- * Persistence process for Packet
- * @author ndevroy
- *
+ * Persistence process for File Info
+ * @author Nathan
+ * @version 1/18/18
  */
-public class PersistPacket extends PersistAbstract {
+public class PersistFileInfo extends PersistAbstract {
 
 	/** JDBC connection string */
 	private final String url = super.url;
@@ -30,29 +31,33 @@ public class PersistPacket extends PersistAbstract {
 	/** DB connection */
 	private Connection conn = null;
 
-	private ArrayList<PacketImpl> data;
+	private ArrayList<FileInfoImpl> data;
 
 	/**
-	 * Constructor for PersistDevice
-	 * @param data List of Device objects to persist
+	 * Constructor for PersistFileInfo
+	 * @param data List of FileInfo objects to persist
 	 */
-	public PersistPacket(ArrayList<PacketImpl> data) {
+	public PersistFileInfo(ArrayList<FileInfoImpl> data) {
 		this.data = data;
 	}
 
 	/**
-	 * Persist a list of Device objects
-	 * @param data the list of Device objects to persist to DB
+	 * Persist a list of FileInfo objects
+	 * @param data the list of FileInfo objects to persist to DB
 	 */
 	public void persist() {
 		System.out.println("Attempting to connect to database....");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);
-			for (PacketImpl item : data) {
+			for (FileInfoImpl item : data) {
 				updtStmt = conn.createStatement();
 				// Need to update SQL statement
-				String sql = "insert into device() values()";
+				String sql = "insert into file_info(file_key, insert_dttm, update_dttm,"
+						+ "file_status,file_path,file_name) values(" + File_Info.file_key +
+						"," + item.getInsrtDttm() + "," + item.getUpdtDttm() + 
+						"," + item.getFileStatus() + "," + item.getFilePath() +
+						"," + item.getFileName() + ")";
 				updtStmt.executeUpdate(sql);
 			}
 		} catch (Exception e) {

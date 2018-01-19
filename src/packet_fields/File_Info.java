@@ -28,7 +28,7 @@ public interface File_Info {
 	void setFileStatus(int fileStatus);
 	
 	/** Getter for fileStatus */
-	int fileStatus();
+	int getFileStatus();
 
 	/** Setter for filePath */
 	void setFilePath(String filePath);
@@ -41,5 +41,4 @@ public interface File_Info {
 	
 	/** Getter for fileName */
 	String getFileName();
-
 }

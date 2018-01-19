@@ -1,4 +1,4 @@
-package Util.Impl;
+package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import packet_fields.Device;
 import packet_fields.Impl.DeviceImpl;
 
 /**
@@ -51,9 +52,12 @@ public class PersistDevice extends PersistAbstract {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);
 			for(DeviceImpl item : data) {
-				updtStmt = conn.createStatement();
-				//Need to update SQL statement
-				String sql = "insert into device() values()";
+				updtStmt = conn.createStatement();		
+				String sql = "insert into device(device_id,ip_address,device_name,mac_address,"
+						+ "device_insrt_dttm,device_updt_dttm) values(" + Device.deviceId + 
+						"," + item.getIpAddress() + "," + item.getDeviceName() + ","
+						+ item.getMacAddress() + "," + item.getDeviceInsrtDttm() +
+						"," + item.getDeviceUpdtDttm() + ")";
 				updtStmt.executeUpdate(sql);
 			}
 		} catch(Exception e) {

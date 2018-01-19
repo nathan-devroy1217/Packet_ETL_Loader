@@ -1,4 +1,4 @@
-package Util.Impl;
+package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import packet_fields.Impl.FileInfoImpl;
+import packet_fields.Impl.PacketImpl;
 
 /**
- * Persistence process for File Info
- * @author Nathan
- * @version 1/18/18
+ * Persistence process for Packet
+ * @author ndevroy
+ *
  */
-public class PersistFileInfo extends PersistAbstract {
+public class PersistPacket extends PersistAbstract {
 
 	/** JDBC connection string */
 	private final String url = super.url;
@@ -30,30 +30,33 @@ public class PersistFileInfo extends PersistAbstract {
 	/** DB connection */
 	private Connection conn = null;
 
-	private ArrayList<FileInfoImpl> data;
+	private ArrayList<PacketImpl> data;
 
 	/**
-	 * Constructor for PersistDevice
-	 * 
-	 * @param data List of Device objects to persist
+	 * Constructor for PersistPacket
+	 * @param data List of Packet objects to persist
 	 */
-	public PersistFileInfo(ArrayList<FileInfoImpl> data) {
+	public PersistPacket(ArrayList<PacketImpl> data) {
 		this.data = data;
 	}
 
 	/**
-	 * Persist a list of Device objects
-	 * @param data the list of Device objects to persist to DB
+	 * Persist a list of Packet objects
+	 * @param data the list of Packet objects to persist to DB
 	 */
 	public void persist() {
 		System.out.println("Attempting to connect to database....");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, password);
-			for (FileInfoImpl item : data) {
+			for (PacketImpl item : data) {
 				updtStmt = conn.createStatement();
-				// Need to update SQL statement
-				String sql = "insert into device() values()";
+				String sql = "insert into packet(id,access_dttm,file_key,http_host,"
+						+ "http_request_uri,src_ip,dst_ip,tsp_src_port,tcp_dst_port,resolved_url) "
+						+ "values(" + item.getId() + "," + item.getAccessDttm() +
+						"," + item.getFileKey() + "," + item.getHttpHost() + "," + item.getHttpRequestUri() +
+						"," + item.getSrcIp() + "," + item.getDstIp() + "," + item.getTcpSrcPort() +
+						"," + item.getTcpDstPort() + "," + item.getResolvedUri() + ")";
 				updtStmt.executeUpdate(sql);
 			}
 		} catch (Exception e) {

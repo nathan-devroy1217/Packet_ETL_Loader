@@ -1,4 +1,4 @@
-package Util.Impl;
+package Util;
 
 public abstract class PersistAbstract {
 

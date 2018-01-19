@@ -71,7 +71,7 @@ public class FileInfoImpl implements File_Info {
 	 * Getter for fileStatus
 	 */
 	@Override
-	public int fileStatus() {
+	public int getFileStatus() {
 		return fileStatus;
 	}
 

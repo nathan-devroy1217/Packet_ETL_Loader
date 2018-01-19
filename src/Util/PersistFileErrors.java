@@ -1,4 +1,4 @@
-package Util.Impl;
+package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,16 +33,16 @@ public class PersistFileErrors extends PersistAbstract {
 	private ArrayList<FileErrorsImpl> data;
 
 	/**
-	 * Constructor for PersistDevice
-	 * @param data List of Device objects to persist
+	 * Constructor for PersistFileErrors
+	 * @param data List of FileErrors objects to persist
 	 */
 	public PersistFileErrors(ArrayList<FileErrorsImpl> data) {
 		this.data = data;
 	}
 
 	/**
-	 * Persist a list of Device objects
-	 * @param data the list of Device objects to persist to DB
+	 * Persist a list of FileError objects
+	 * @param data the list of FileError objects to persist to DB
 	 */
 	public void persist() {
 		System.out.println("Attempting to connect to database....");
@@ -51,8 +51,9 @@ public class PersistFileErrors extends PersistAbstract {
 			conn = DriverManager.getConnection(url, user, password);
 			for (FileErrorsImpl item : data) {
 				updtStmt = conn.createStatement();
-				// Need to update SQL statement
-				String sql = "insert into device() values()";
+				String sql = "insert into file_errors(file_key,insert_dttm,update_dttm,error_msg)"
+						+ " values(" + item.getFileKey() + "," + item.getInsrtDttm() + "," + 
+						item.getUpdtDttm() + "," + item.getErrorMsg() + ")";
 				updtStmt.executeUpdate(sql);
 			}
 		} catch (Exception e) {

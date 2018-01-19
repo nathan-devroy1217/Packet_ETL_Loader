@@ -1,4 +1,4 @@
-package Util.Impl;
+package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import packet_fields.Email_Client;
 import packet_fields.Impl.EmailClientImpl;
 
 /**
@@ -33,16 +34,16 @@ public class PersistEmailClient extends PersistAbstract {
 	private ArrayList<EmailClientImpl> data;
 			
 	/**
-	 * Constructor for PersistDevice
-	 * @param data List of Device objects to persist
+	 * Constructor for PersistEmailClient
+	 * @param data List of EmailClient objects to persist
 	 */
 	public PersistEmailClient(ArrayList<EmailClientImpl> data) {
 		this.data = data;
 	}
 	
 	/**
-	 * Persist a list of Device objects
-	 * @param data the list of Device objects to persist to DB
+	 * Persist a list of EmailClient objects
+	 * @param data the list of EmailClient objects to persist to DB
 	 */
 	public void persist() {
 		System.out.println("Attempting to connect to database....");
@@ -51,8 +52,9 @@ public class PersistEmailClient extends PersistAbstract {
 			conn = DriverManager.getConnection(url, user, password);
 			for(EmailClientImpl item : data) {
 				updtStmt = conn.createStatement();
-				//Need to update SQL statement
-				String sql = "insert into device() values()";
+				String sql = "insert into email_client(id,client_name,email_addr,last_msg)"
+						+ " values(" + Email_Client.id + "," + item.getClientName() + ","
+						+ item.getEmailAddress() + "," + item.getLastMsg() + ")";
 				updtStmt.executeUpdate(sql);
 			}
 		} catch(Exception e) {

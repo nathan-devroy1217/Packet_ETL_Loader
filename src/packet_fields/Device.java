@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public interface Device {
 	
 	/** Device Id variable */
-	final String deviceId = "NULL";
+	final static String deviceId = "NULL";
 	
 	/** Setter for ipAddress */
 	void setIpAddress(String ipAddress);
