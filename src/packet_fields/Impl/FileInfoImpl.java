@@ -1,6 +1,8 @@
 package packet_fields.Impl;
 
 
+import java.io.File;
+
 import packet_fields.File_Info;
 
 /**
@@ -19,7 +21,18 @@ public class FileInfoImpl implements File_Info {
 	
 	/** Name of file */
 	private String fileName;
+	
+	/** File associated with FileInfo object */
+	private File file;
 
+	/**
+	 * Constructor for FileInfoImpl
+	 * @param file File to be processed
+	 */
+	public FileInfoImpl(File file) {
+		setFile(file);
+	}
+	
 	/**
 	 * Setter for fileStatus
 	 */
@@ -66,5 +79,15 @@ public class FileInfoImpl implements File_Info {
 	@Override
 	public String getFileName() {
 		return fileName;
+	}
+
+	@Override
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	@Override
+	public File getFile() {
+		return file;
 	}
 }

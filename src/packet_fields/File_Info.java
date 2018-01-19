@@ -1,5 +1,7 @@
 package packet_fields;
 
+import java.io.File;
+
 /**
  * Declaration of File_Info Interface
  * @author Nathan
@@ -33,4 +35,10 @@ public interface File_Info {
 	
 	/** Getter for fileName */
 	String getFileName();
+	
+	/** Setter for File */
+	void setFile(File file);
+	
+	/** Getter for object */
+	File getFile();
 }
