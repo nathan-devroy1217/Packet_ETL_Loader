@@ -40,6 +40,13 @@ public class FileInfoImpl implements File_Info {
 	}
 	
 	/**
+	 * Overloaded constructor for FileInfoImpl
+	 */
+	public FileInfoImpl() {
+		
+	}
+	
+	/**
 	 * Setter for fileStatus
 	 */
 	@Override
