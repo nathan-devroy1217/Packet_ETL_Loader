@@ -17,16 +17,16 @@ import packet_fields.Impl.DeviceImpl;
 public class PersistDevice extends PersistAbstract {
 
 	/** JDBC connection string */
-	private final String url = super.url;
+	private final String url = HomeNetworkConstants.url;
 	
 	/** Insert statement to DB */
 	private Statement updtStmt = null;
 	
 	/** User name for DB connection */
-	private final String user = super.user;
+	private final String user = HomeNetworkConstants.user;
 	
 	/** Password for DB connection */
-	private final String password = super.password;
+	private final String password = HomeNetworkConstants.password;
 	
 	/** DB connection */
 	private Connection conn = null;

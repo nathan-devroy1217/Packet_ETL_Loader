@@ -17,21 +17,23 @@ import packet_fields.Impl.FileErrorsImpl;
 public class PersistFileErrors extends PersistAbstract {
 
 	/** JDBC connection string */
-	private final String url = super.url;
+	private final String url = HomeNetworkConstants.url;
 
 	/** Insert statement to DB */
 	private Statement updtStmt = null;
 
 	/** User name for DB connection */
-	private final String user = super.user;
+	private final String user = HomeNetworkConstants.user;
 
 	/** Password for DB connection */
-	private final String password = super.password;
+	private final String password = HomeNetworkConstants.password;
 
 	/** DB connection */
 	private Connection conn = null;
 
 	private ArrayList<FileErrorsImpl> data;
+	
+	private FileInbound inb;
 
 	/**
 	 * Constructor for PersistFileErrors
@@ -39,6 +41,14 @@ public class PersistFileErrors extends PersistAbstract {
 	 */
 	public PersistFileErrors(ArrayList<FileErrorsImpl> data) {
 		this.data = data;
+	}
+	
+	/**
+	 * Overloaded constructor with FileInbound type
+	 * @param inb FileInbound object with key file info
+	 */
+	public PersistFileErrors(FileInbound inb) {
+		this.inb = inb;
 	}
 
 	/**
@@ -58,6 +68,32 @@ public class PersistFileErrors extends PersistAbstract {
 				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				System.out.println("Closing database connection....");
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	
+	public void populateErrorIntoTable(FileInbound inb, String errMsg) {
+		System.out.println("Attempting to connect to database....");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url, user, password);
+			updtStmt = conn.createStatement();
+			String sql = "insert into file_errors(file_key,insert_dttm,update_dttm,error_msg)" + " values("
+					+ inb.getFileInfo().getFileKey() + "," + File_Errors.insrtDttm + "," + File_Errors.updtDttm + ",\""
+					+ errMsg + "\");";
+			System.out.println(sql);
+			updtStmt.executeUpdate(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -18,8 +18,8 @@ public class FileProcessor {
 
 	/** File being read by processor */
 	private File file;
-	
-	private FileErrorsImpl fileErrors;
+		
+	private PersistFileErrors fileErrors;
 	
 	/** FileInbound object containing file info and file itself */
 	private FileInbound inb;
@@ -53,11 +53,19 @@ public class FileProcessor {
 			 * 
 			 */			
 			inb.updateFileSuccess();
-		} catch(FileNotFoundException ex) {
-			// NEED TO POPULATE FILE_ERRORS OBJECT TO CATCH ERRORS
+		} catch(FileNotFoundException e) {
+			//Add error to file_errors table
+			fileErrors = new PersistFileErrors(inb);
+			fileErrors.populateErrorIntoTable(inb, e.toString());
+			
+			//Update file_info table
 			inb.updateFileFail();
 		} catch(IOException ex) {
-			// NEED TO POPULATE FILE_ERRORS OBJECT TO CATCH ERRORS
+			//Add error to file_errors table
+			fileErrors = new PersistFileErrors(inb);
+			fileErrors.populateErrorIntoTable(inb, ex.toString());
+			
+			//Update file_info table
 			inb.updateFileFail();
 		}
 	}
