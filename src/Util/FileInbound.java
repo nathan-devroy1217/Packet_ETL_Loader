@@ -1,8 +1,13 @@
 package Util;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import packet_fields.File_Info;
 import packet_fields.Impl.FileInfoImpl;
 
 /**
@@ -19,11 +24,16 @@ public class FileInbound {
 	/** FileInfo object to create */
 	private FileInfoImpl fileInfo;
 	
+	/** DB connection */
+	private Connection conn;
+	
 	/**
 	 * Constructor for FileInbound
 	 * @param file Inbound file to process
 	 */
-	public FileInbound(File file) {
+	public FileInbound(File file, Connection conn) {
+		setFile(file);
+		this.conn = conn;
 		fileInfo = new FileInfoImpl(file);
 		processInboundFile();
 	}
@@ -67,11 +77,13 @@ public class FileInbound {
 	private void processInboundFile() {
 		fileInfo.setFileName(file.getName());
 		fileInfo.setFilePath(file.getAbsolutePath());
+		fileInfo.setInsrtDttm(getCurrentTime());
+		fileInfo.setUpdtDttm(getCurrentTime());
 		fileInfo.setFileStatus(HomeNetworkConstants.fileLoadUnprocessed);
 		
 		ArrayList<FileInfoImpl> list = new ArrayList<FileInfoImpl>();
 		list.add(fileInfo);
-		PersistFileInfo pfi = new PersistFileInfo(list);
+		PersistFileInfo pfi = new PersistFileInfo(list, conn);
 		pfi.persist();
 	}
 	
@@ -79,7 +91,7 @@ public class FileInbound {
 	 * Update table columns for processing file
 	 */
 	public void updateFileProcessing() {
-		PersistFileInfo pfi = new PersistFileInfo(this);
+		PersistFileInfo pfi = new PersistFileInfo(this, conn);
 		pfi.updateFileInfoProcessing();
 	}
 	
@@ -87,7 +99,7 @@ public class FileInbound {
 	 * Update table columns for successful file load
 	 */
 	public void updateFileSuccess() {
-		PersistFileInfo pfi = new PersistFileInfo(this);
+		PersistFileInfo pfi = new PersistFileInfo(this, conn);
 		pfi.updateFileInfoSuccess();
 	}
 	
@@ -95,7 +107,21 @@ public class FileInbound {
 	 * Update table columns for failed file load
 	 */
 	public void updateFileFail() {
-		PersistFileInfo pfi = new PersistFileInfo(this);
+		PersistFileInfo pfi = new PersistFileInfo(this, conn);
 		pfi.updateFileInfoFailed();
 	}
+	
+	/**
+	 * Method returns current date and time
+	 * @return current date and time
+	 */
+	public String getCurrentTime() {
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		return timeStamp;
+	}
+	
+	public Connection getConnection() {
+		return conn;
+	}
 }
+	

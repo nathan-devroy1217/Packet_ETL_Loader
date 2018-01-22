@@ -9,4 +9,6 @@ public class HomeNetworkConstants {
 	public static final String url = "jdbc:mysql://192.168.1.15:3306/home_network_tst";
 	public static final String user = "nathan";
 	public static final String password = "Elijah1027";
+	
+	
 }

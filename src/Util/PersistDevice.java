@@ -1,8 +1,6 @@
 package Util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -16,29 +14,22 @@ import packet_fields.Impl.DeviceImpl;
  */
 public class PersistDevice {
 
-	/** JDBC connection string */
-	private final String url = HomeNetworkConstants.url;
-	
 	/** Insert statement to DB */
 	private Statement updtStmt = null;
 	
-	/** User name for DB connection */
-	private final String user = HomeNetworkConstants.user;
-	
-	/** Password for DB connection */
-	private final String password = HomeNetworkConstants.password;
-	
 	/** DB connection */
-	private Connection conn = null;
+	private Connection conn;
 	
+	/** List of Device objects */
 	private ArrayList<DeviceImpl> data;
 			
 	/**
 	 * Constructor for PersistDevice
 	 * @param data List of Device objects to persist
 	 */
-	public PersistDevice(ArrayList<DeviceImpl> data) {
+	public PersistDevice(ArrayList<DeviceImpl> data, Connection conn) {
 		this.data = data;
+		this.conn = conn;
 	}
 	
 	/**
@@ -46,10 +37,8 @@ public class PersistDevice {
 	 * @param data the list of Device objects to persist to DB
 	 */
 	public void persist() {
-		System.out.println("Attempting to connect to database....");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url, user, password);
 			for(DeviceImpl item : data) {
 				updtStmt = conn.createStatement();		
 				String sql = "insert into device(device_id,ip_address,device_name,mac_address,"
@@ -62,15 +51,6 @@ public class PersistDevice {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			if(conn != null) {
-				System.out.println("Closing database connection....");
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 }

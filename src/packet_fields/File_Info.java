@@ -11,13 +11,7 @@ public interface File_Info {
 	
 	/** Value of fileKey */
 	final String file_key = "NULL";
-	
-	/** Last insert */
-	final String insrtDttm = "CURRENT_TIMESTAMP";
-	
-	/** Last update */
-	final String updtDttm = "CURRENT_TIMESTAMP";
-	
+		
 	/** Setter for fileStatus */
 	void setFileStatus(int fileStatus);
 	
@@ -41,4 +35,16 @@ public interface File_Info {
 	
 	/** Getter for object */
 	File getFile();
+	
+	/** Setter for insrtDttm */
+	void setInsrtDttm(String dttm);
+	
+	/** Getter for insrtDttm */
+	String getInsrtDttm();
+	
+	/** Setter for updtDttm */
+	void setUpdtDttm(String updtDttm);
+	
+	/** Getter for updtDttm */
+	String getUpdtDttm();
 }

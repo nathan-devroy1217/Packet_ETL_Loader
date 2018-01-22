@@ -1,5 +1,7 @@
 package packet_fields.Impl;
 
+import java.sql.Timestamp;
+
 import packet_fields.Packet;
 
 /**
@@ -26,14 +28,31 @@ public class PacketImpl implements Packet {
 	private String dstIp;
 	
 	/** Source TCP port */
-	private int tcpSrcPort;
+	private String tcpSrcPort;
 	
 	/** Destination TCP port */
-	private int tcpDstPort;
+	private String tcpDstPort;
 	
 	/** URI of packet transmitted */
 	private String resolvedUri;
 	
+	/** Time packet inserted into DB */
+	private String accessDttm;
+		
+	/**
+	 * Getter for accessDttm
+	 */
+	public String getAccessDttm() {
+		return accessDttm;
+	}
+
+	/**
+	 * Setter for accessDttm
+	 */
+	public void setAccessDttm(String accessDttm) {
+		this.accessDttm = accessDttm;
+	}
+
 	/**
 	 * Setter for fileKey
 	 */
@@ -118,7 +137,7 @@ public class PacketImpl implements Packet {
 	 * Setter for tcpSrcPort
 	 */
 	@Override
-	public void setTcpSrcPort(int tcpSrcPort) {
+	public void setTcpSrcPort(String tcpSrcPort) {
 		this.tcpSrcPort = tcpSrcPort;
 	}
 
@@ -126,7 +145,7 @@ public class PacketImpl implements Packet {
 	 * Getter for tcpSrcPort
 	 */
 	@Override
-	public int getTcpSrcPort() {
+	public String getTcpSrcPort() {
 		return tcpSrcPort;
 	}
 
@@ -134,7 +153,7 @@ public class PacketImpl implements Packet {
 	 * Setter for tcpDstPort
 	 */
 	@Override
-	public void setTcpDstPort(int tcpDstPort) {
+	public void setTcpDstPort(String tcpDstPort) {
 		this.tcpDstPort = tcpDstPort;
 	}
 
@@ -142,7 +161,7 @@ public class PacketImpl implements Packet {
 	 * Getter for tcpDstPort
 	 */
 	@Override
-	public int getTcpDstPort() {
+	public String getTcpDstPort() {
 		return tcpDstPort;
 	}
 

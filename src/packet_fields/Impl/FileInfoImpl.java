@@ -30,6 +30,12 @@ public class FileInfoImpl implements File_Info {
 	
 	/** File associated with FileInfo object */
 	private File file;
+	
+	/** Time file is inserted into DB */
+	private String insrtDttm;
+	
+	/** Time file is updated in DB */
+	private String updtDttm;
 
 	/**
 	 * Constructor for FileInfoImpl
@@ -104,6 +110,22 @@ public class FileInfoImpl implements File_Info {
 		return file;
 	}
 	
+	public String getInsrtDttm() {
+		return insrtDttm;
+	}
+	
+	public void setInsrtDttm(String insrtDttm) {
+		this.insrtDttm = insrtDttm;
+	}
+	
+	public String getUpdtDttm() {
+		return updtDttm;
+	}
+	
+	public void setUpdtDttm(String updtDttm) {
+		this.updtDttm = updtDttm;
+	}
+	
 	/** Getter for fileKey */
 	public int getFileKey() {
 		Connection conn = null;
@@ -115,8 +137,8 @@ public class FileInfoImpl implements File_Info {
 					HomeNetworkConstants.user, HomeNetworkConstants.password);
 			Statement stmt = conn.createStatement();
 			// Need to update SQL statement
-			String sql = "select file_key from file_info where file_name=\"" + this.getFileName() + "\" and insert_dttm=" 
-			+ File_Info.insrtDttm + ";";
+			String sql = "select file_key from file_info where file_name=\"" + this.getFileName() + "\" and insert_dttm=\"" 
+			+ this.getInsrtDttm() + "\";";
 			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {

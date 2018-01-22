@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import packet_fields.Impl.PacketImpl;
 
 /**
  * FileProcessor takes file input,
@@ -25,15 +29,21 @@ public class FileProcessor {
 	
 	/** FileInbound object containing file info and file itself */
 	private FileInbound inb;
-
+	
+	/** ArrayList of PacketImpl objects */
+	private ArrayList<PacketImpl> packetList;
+	
+	/** DB connection */
+	private Connection conn;
 	/**
 	 * Constructor for FileProcessor
 	 * @param fileInb FileInbound object containing file info and file itself
 	 */
-	public FileProcessor(FileInbound fileInb) {
+	public FileProcessor(FileInbound fileInb, Connection conn) {
 		file = fileInb.getFile();
 		setInb(fileInb);
 		line = null;
+		this.conn = conn;
 	}
 	
 	/**
@@ -41,6 +51,7 @@ public class FileProcessor {
 	 */
 	public void processFile() {
 		BufferedReader bufferedReader = null;
+		packetList = new ArrayList<PacketImpl>();
 		try {
 			//Start by setting file status as "in processing"
 			inb.updateFileProcessing();
@@ -48,9 +59,16 @@ public class FileProcessor {
 			bufferedReader = new BufferedReader(fileReader);
 			
 			while((line = bufferedReader.readLine()) != null) {
+				//Add processed packet objects to packetList
 				PacketProcessor pp = new PacketProcessor(inb, line.toString());
-				pp.processPacket();
+				packetList.add(pp.processPacket());
 			}
+			
+			//Once all packets processed, add to DB
+			PersistPacket persistPacket = new PersistPacket(packetList, conn);
+			persistPacket.persist();
+			
+			//Update file_info table for successful load
 			inb.updateFileSuccess();
 			bufferedReader.close();
 		} catch(FileNotFoundException e) {

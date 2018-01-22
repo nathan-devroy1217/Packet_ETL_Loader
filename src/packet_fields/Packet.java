@@ -1,14 +1,13 @@
 package packet_fields;
 
+import java.sql.Timestamp;
+
 /**
  * Declaration of Packet interface
  * @author Nathan
  * @version 1/16/18 
  */
 public interface Packet {
-
-	/** Packet access time */
-	final String accessDttm = "CURRENT_TIMESTAMP";
 	
 	/** Id of packet */
 	final String id = "NULL";
@@ -44,20 +43,26 @@ public interface Packet {
 	String getDstIp();
 	
 	/** Setter for tcpSrcPort */
-	void setTcpSrcPort(int tcpSrcPort);
+	void setTcpSrcPort(String tcpSrcPort);
 	
 	/** Getter for tcpSrcPort */
-	int getTcpSrcPort();
+	String getTcpSrcPort();
 	
 	/** Setter for tcpDstPort */
-	void setTcpDstPort(int tcpDstPort);
+	void setTcpDstPort(String tcpDstPort);
 	
 	/** Getter for tcpDstPort */
-	int getTcpDstPort();
+	String getTcpDstPort();
 	
 	/** Setter for resolvedUri */
 	void setResolvedUri(String resolvedUri);
 	
 	/** Getter for resolvedUri */
 	String getResolvedUri();
+	
+	/** Setter for accessDttm */
+	void setAccessDttm(String accessDttm);
+	
+	/** Getter for accessDttm */
+	String getAccessDttm();
 }
