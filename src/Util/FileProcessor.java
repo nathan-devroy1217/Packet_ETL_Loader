@@ -61,12 +61,17 @@ public class FileProcessor {
 			while((line = bufferedReader.readLine()) != null) {
 				//Add processed packet objects to packetList
 				PacketProcessor pp = new PacketProcessor(inb, line.toString());
-				packetList.add(pp.processPacket());
+				//packetList.add(pp.processPacket());
+				PacketImpl procPacket = pp.processPacket();
+				//PersistPacket persistPacket = new PersistPacket(packetList, conn);
+				PersistPacket persistPacket = new PersistPacket(procPacket, conn);
+				persistPacket.persist();
+				
 			}
 			
 			//Once all packets processed, add to DB
-			PersistPacket persistPacket = new PersistPacket(packetList, conn);
-			persistPacket.persist();
+			//PersistPacket persistPacket = new PersistPacket(packetList, conn);
+			//persistPacket.persist();
 			
 			//Update file_info table for successful load
 			inb.updateFileSuccess();

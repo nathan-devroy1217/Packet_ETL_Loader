@@ -21,13 +21,13 @@ public class PersistDevice {
 	private Connection conn;
 	
 	/** List of Device objects */
-	private ArrayList<DeviceImpl> data;
+	private DeviceImpl data;
 			
 	/**
 	 * Constructor for PersistDevice
 	 * @param data List of Device objects to persist
 	 */
-	public PersistDevice(ArrayList<DeviceImpl> data, Connection conn) {
+	public PersistDevice(DeviceImpl data, Connection conn) {
 		this.data = data;
 		this.conn = conn;
 	}
@@ -39,17 +39,14 @@ public class PersistDevice {
 	public void persist() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			for(DeviceImpl item : data) {
-				updtStmt = conn.createStatement();		
-				String sql = "insert into device(device_id,ip_address,device_name,mac_address,"
-						+ "device_insrt_dttm,device_updt_dttm) values(" + Device.deviceId + 
-						",\"" + item.getIpAddress() + "\",\"" + item.getDeviceName() + "\",\""
-						+ item.getMacAddress() + "\"," + Device.deviceInsrtDttm +
-						"," + Device.deviceUpdtDttm + ");";
-				System.out.println(sql);
-				updtStmt.executeUpdate(sql);
-			}
-		} catch(Exception e) {
+			updtStmt = conn.createStatement();
+			String sql = "insert into device(device_id,ip_address,device_name,mac_address,"
+					+ "device_insrt_dttm,device_updt_dttm) values(" + Device.deviceId + ",\"" + data.getIpAddress()
+					+ "\",\"" + data.getDeviceName() + "\",\"" + data.getMacAddress() + "\"," + Device.deviceInsrtDttm
+					+ "," + Device.deviceUpdtDttm + ");";
+			System.out.println(sql);
+			updtStmt.executeUpdate(sql);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

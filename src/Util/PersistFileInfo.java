@@ -26,13 +26,13 @@ public class PersistFileInfo {
 	private FileInbound inb;
 
 	/** ArrayList of FileInfoImpl objects */
-	private ArrayList<FileInfoImpl> data;
+	private FileInfoImpl data;
 
 	/**
 	 * Constructor for PersistFileInfo
 	 * @param data List of FileInfo objects to persist
 	 */
-	public PersistFileInfo(ArrayList<FileInfoImpl> data, Connection conn) {
+	public PersistFileInfo(FileInfoImpl data, Connection conn) {
 		this.data = data;
 		this.conn = conn;
 	}
@@ -63,17 +63,16 @@ public class PersistFileInfo {
 		System.out.println("Attempting to connect to database....");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			for (FileInfoImpl item : data) {
 				updtStmt = conn.createStatement();
 				// Need to update SQL statement
 				String sql = "insert into file_info(file_key, insert_dttm, update_dttm,"
 						+ "file_status,file_path,file_name) values(" + File_Info.file_key +
-						",\"" + item.getInsrtDttm() + "\",\"" + item.getUpdtDttm() + 
-						"\"," + item.getFileStatus() + ",\"" + item.getFilePath() +
-						"\",\"" + item.getFileName() + "\")";
+						",\"" + data.getInsrtDttm() + "\",\"" + data.getUpdtDttm() + 
+						"\"," + data.getFileStatus() + ",\"" + data.getFilePath() +
+						"\",\"" + data.getFileName() + "\")";
 				System.out.println(sql);
 				updtStmt.executeUpdate(sql);
-			}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -90,9 +89,9 @@ public class PersistFileInfo {
 			// Need to update SQL statement
 			String sql = "update file_info set file_status=" + HomeNetworkConstants.fileProcessing + 
 					" where file_name=\"" + 
-					(data != null ? data.get(0).getFileName() : inb.getFileInfo().getFileName()) 
+					(data != null ? data.getFileName() : inb.getFileInfo().getFileName()) 
 					+ "\" and file_key=" + 
-					(data != null ? data.get(0).getFileKey() : inb.getFileInfo().getFileKey()) 
+					(data != null ? data.getFileKey() : inb.getFileInfo().getFileKey()) 
 					+ ";";
 			System.out.println(sql);
 			updtStmt.executeUpdate(sql);
@@ -113,9 +112,9 @@ public class PersistFileInfo {
 			// Need to update SQL statement
 			String sql = "update file_info set file_status=" + HomeNetworkConstants.successfulFileLoad + 
 					" where file_name=\"" + 
-					(data != null ? data.get(0).getFileName() : inb.getFileInfo().getFileName()) 
+					(data != null ? data.getFileName() : inb.getFileInfo().getFileName()) 
 					+ "\" and file_key=" + 
-					(data != null ? data.get(0).getFileKey() : inb.getFileInfo().getFileKey()) 
+					(data != null ? data.getFileKey() : inb.getFileInfo().getFileKey()) 
 					+ ";";
 			System.out.println(sql);
 			updtStmt.executeUpdate(sql);
@@ -135,8 +134,8 @@ public class PersistFileInfo {
 			updtStmt = conn.createStatement();
 			// Need to update SQL statement
 			String sql = "update file_info set file_status=" + HomeNetworkConstants.failedFileLoad + 
-					" where file_name=\"" + data.get(0).getFileName() + "\" and file_key=" + 
-					data.get(0).getFileKey() + ";";
+					" where file_name=\"" + data.getFileName() + "\" and file_key=" + 
+					data.getFileKey() + ";";
 			System.out.println(sql);
 			updtStmt.executeUpdate(sql);
 			System.out.println("File status updated!");

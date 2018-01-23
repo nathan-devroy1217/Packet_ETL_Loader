@@ -34,7 +34,7 @@ public class FileInbound {
 	public FileInbound(File file, Connection conn) {
 		setFile(file);
 		this.conn = conn;
-		fileInfo = new FileInfoImpl(file);
+		fileInfo = new FileInfoImpl(file, conn);
 		processInboundFile();
 	}
 
@@ -80,10 +80,8 @@ public class FileInbound {
 		fileInfo.setInsrtDttm(getCurrentTime());
 		fileInfo.setUpdtDttm(getCurrentTime());
 		fileInfo.setFileStatus(HomeNetworkConstants.fileLoadUnprocessed);
-		
-		ArrayList<FileInfoImpl> list = new ArrayList<FileInfoImpl>();
-		list.add(fileInfo);
-		PersistFileInfo pfi = new PersistFileInfo(list, conn);
+
+		PersistFileInfo pfi = new PersistFileInfo(fileInfo, conn);
 		pfi.persist();
 	}
 	
