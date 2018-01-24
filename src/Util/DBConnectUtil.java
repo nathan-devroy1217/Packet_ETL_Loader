@@ -3,10 +3,6 @@ package Util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import packet_fields.Packet;
-import packet_fields.Impl.PacketImpl;
 
 public class DBConnectUtil {
 
