@@ -32,7 +32,8 @@ public class PacketProcessor {
 	 */
 	public PacketImpl processPacket() {
 		String[] strArr = line.split("\\*");
-		if(strArr.length == 8) {
+		if(strArr.length == 8 && (!strArr[3].equals("68.46.77.238") &&
+				!strArr[4].equals("68.46.77.238") && !strArr[3].equals("192.168.1.1"))) {
 			PacketImpl packetImpl = new PacketImpl();
 			
 			packetImpl.setAccessDttm(processTime(strArr[0]));

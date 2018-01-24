@@ -36,20 +36,24 @@ public class FileInfoImpl implements File_Info {
 	
 	/** Time file is updated in DB */
 	private String updtDttm;
+	
+	/** DB Connection */
+	private Connection conn;
 
 	/**
 	 * Constructor for FileInfoImpl
 	 * @param file File to be processed
 	 */
-	public FileInfoImpl(File file) {
+	public FileInfoImpl(File file, Connection conn) {
 		setFile(file);
+		this.conn = conn;
 	}
 	
 	/**
 	 * Overloaded constructor for FileInfoImpl
 	 */
-	public FileInfoImpl() {
-		
+	public FileInfoImpl(Connection conn) {
+		this.conn = conn;
 	}
 	
 	/**
@@ -128,13 +132,9 @@ public class FileInfoImpl implements File_Info {
 	
 	/** Getter for fileKey */
 	public int getFileKey() {
-		Connection conn = null;
 		ResultSet rs = null;
 		Integer value = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(HomeNetworkConstants.url,
-					HomeNetworkConstants.user, HomeNetworkConstants.password);
 			Statement stmt = conn.createStatement();
 			// Need to update SQL statement
 			String sql = "select file_key from file_info where file_name=\"" + this.getFileName() + "\" and insert_dttm=\"" 
@@ -146,14 +146,6 @@ public class FileInfoImpl implements File_Info {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		return value;
 	}

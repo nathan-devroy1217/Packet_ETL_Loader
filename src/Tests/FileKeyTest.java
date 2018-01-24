@@ -1,11 +1,9 @@
 package Tests;
 
-import java.io.File;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import Util.FileInbound;
 import Util.PersistFileInfo;
 import packet_fields.Impl.FileInfoImpl;
 
@@ -16,10 +14,14 @@ import packet_fields.Impl.FileInfoImpl;
  */
 public class FileKeyTest {
 
+	/** DB Connection */
+	private Connection conn;
+	
 	/**
 	 * Constructor for FileKeyTest
 	 */
-	public FileKeyTest() {
+	public FileKeyTest(Connection conn) {
+		this.conn = conn;
 	}
 	
 	/**
@@ -27,16 +29,14 @@ public class FileKeyTest {
 	 */
 	public void checkFileKey() {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		ArrayList<FileInfoImpl> list = new ArrayList<FileInfoImpl>();
-		FileInfoImpl fileInfo = new FileInfoImpl();
+		FileInfoImpl fileInfo = new FileInfoImpl(conn);
 		fileInfo.setFileStatus(2);
 		fileInfo.setInsrtDttm(timeStamp);
 		fileInfo.setUpdtDttm(timeStamp);
 		fileInfo.setFilePath("/home/pi/files/");
 		fileInfo.setFileName("testFile.dat");
 		
-		list.add(fileInfo);
-		PersistFileInfo fi = new PersistFileInfo(list);
+		PersistFileInfo fi = new PersistFileInfo(fileInfo, conn);
 		fi.persist();
 		
 		System.out.println("File key: " + fileInfo.getFileKey());
@@ -44,16 +44,14 @@ public class FileKeyTest {
 	
 	public void checkFileProcessing() {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		ArrayList<FileInfoImpl> list = new ArrayList<FileInfoImpl>();
-		FileInfoImpl fileInfo = new FileInfoImpl();
+		FileInfoImpl fileInfo = new FileInfoImpl(conn);
 		fileInfo.setFileStatus(0);
 		fileInfo.setInsrtDttm(timeStamp);
 		fileInfo.setUpdtDttm(timeStamp);
 		fileInfo.setFilePath("/home/pi/files/");
 		fileInfo.setFileName("testFile.dat");
 		
-		list.add(fileInfo);
-		PersistFileInfo fi = new PersistFileInfo(list);
+		PersistFileInfo fi = new PersistFileInfo(fileInfo, conn);
 		fi.persist();
 		
 		System.out.println("Check switch to processing on inbound file:");

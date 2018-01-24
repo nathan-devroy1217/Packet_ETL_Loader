@@ -19,15 +19,16 @@ public class PersistPacket {
 
 	/** DB connection */
 	private Connection conn = null;
-
-	private ArrayList<PacketImpl> data;
+	
+	private PacketImpl packet;
 
 	/**
 	 * Constructor for PersistPacket
 	 * @param data List of Packet objects to persist
 	 */
-	public PersistPacket(ArrayList<PacketImpl> data, Connection conn) {
-		this.data = data;
+	//public PersistPacket(ArrayList<PacketImpl> data, Connection conn) {
+	public PersistPacket(PacketImpl data, Connection conn) {
+		this.packet = data;
 		this.conn = conn;
 	}
 	
@@ -37,19 +38,19 @@ public class PersistPacket {
 	 */
 	public void persist() {
 		try {
-			for (PacketImpl item : data) {
-				if(item != null) {
+			//for (PacketImpl item : data) {
+				if(packet != null) {
 					updtStmt = conn.createStatement();
 					String sql = "insert into packet(id,access_dttm,file_key,http_host,"
 							+ "http_request_uri,src_ip,dst_ip,tcp_src_port,tcp_dst_port,resolved_url) "
-							+ "values(" + Packet.id + ",\"" + item.getAccessDttm() +
-							"\"," + item.getFileKey() + ",\"" + item.getHttpHost() + "\",\"" + item.getHttpRequestUri() +
-							"\",\"" + item.getSrcIp() + "\",\"" + item.getDstIp() + "\"," + item.getTcpSrcPort() +
-							"," + item.getTcpDstPort() + ",\"" + item.getResolvedUri() + "\");";
+							+ "values(" + Packet.id + ",\"" + packet.getAccessDttm() +
+							"\"," + packet.getFileKey() + ",\"" + packet.getHttpHost() + "\",\"" + packet.getHttpRequestUri() +
+							"\",\"" + packet.getSrcIp() + "\",\"" + packet.getDstIp() + "\"," + packet.getTcpSrcPort() +
+							"," + packet.getTcpDstPort() + ",\"" + packet.getResolvedUri() + "\");";
 					System.out.println(sql);
 					updtStmt.executeUpdate(sql);
 				}
-			}
+			//}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

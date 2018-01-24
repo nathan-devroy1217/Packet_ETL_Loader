@@ -1,9 +1,11 @@
 import Tests.FileKeyTest;
 import Tests.PacketInsertTest;
 import Tests.ProcessFileTest;
+import Util.DBConnectUtil;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Connection;
 
 /**
  * Driver for Packet_ETL_Loader
@@ -13,9 +15,13 @@ import java.net.UnknownHostException;
 public class Driver {
 
 	public static void main(String[] args) {
-		PacketInsertTest test = new PacketInsertTest();
-		FileKeyTest fKTest = new FileKeyTest();
-		ProcessFileTest pft = new ProcessFileTest();
+		// Open database connection to TST
+		DBConnectUtil dbc = new DBConnectUtil();
+		Connection conn = dbc.connectDB();
+		
+		PacketInsertTest test = new PacketInsertTest(conn);
+		FileKeyTest fKTest = new FileKeyTest(conn);
+		ProcessFileTest pft = new ProcessFileTest(conn);
 		//*********************************
 		//Uncomment to initiate test persistence cases
 		//*********************************
@@ -35,6 +41,8 @@ public class Driver {
 		//Uncomment to initiate file processing test case
 		//*********************************
 		pft.processTestFile();
-			
+		
+		// Close database connection
+		dbc.closeDB();
 	}
 }
