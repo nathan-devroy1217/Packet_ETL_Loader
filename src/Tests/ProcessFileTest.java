@@ -34,5 +34,13 @@ public class ProcessFileTest {
 		dbc.closeDB();
 	}
 	
-	
+	public void processTestDeviceFile() {
+		DBConnectUtil dbc = new DBConnectUtil();
+		Connection conn = dbc.connectDB();
+		File file = new File("devices1.txt");
+		FileInbound inb = new FileInbound(file, conn);
+		FileProcessor fp = new FileProcessor(inb, conn);
+		fp.processDeviceFile();
+		dbc.closeDB();
+	}
 }
