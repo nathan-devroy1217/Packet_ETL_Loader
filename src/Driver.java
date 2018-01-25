@@ -20,6 +20,7 @@ public class Driver {
 	/**
 	 * Driver for Packet_ETL_Loader
 	 * @param args input arguments
+	 * @throws Exception 
 	 */
 	public static void main(String[] args) {
 
@@ -27,18 +28,26 @@ public class Driver {
 		 * args[0] ==> File to load
 		 * args[1] ==> Execution environment: 1 = local dev
 		 * 									  2 = remote (rpi)
+		 * args[2] ==> Process packet load OR device load: "Packet" = packet load
+		 * 												   "Device" = device load
 		 */
 		
 		// Open database connection to TST
+		
 		int executionEnvironment = Integer.parseInt(args[1]);
+		String loadSpec = args[2];
 		DBConnectUtil dbc = new DBConnectUtil(executionEnvironment);
 		Connection conn = dbc.connectDB();
 		File file = new File(args[0]);
 	
 		FileInbound inb = new FileInbound(file, conn);
 		FileProcessor fp = new FileProcessor(inb, conn);
-		fp.processFile();
 		
+		if(loadSpec.equals("Packet")) {
+			fp.processFile();
+		} else if(loadSpec.equals("Device")) {
+			fp.processDeviceFile();
+		} 		
 		
 		
 		//PacketInsertTest test = new PacketInsertTest(conn);
@@ -63,7 +72,7 @@ public class Driver {
 		//Uncomment to initiate file processing test case
 		//*********************************
 		//pft.processTestFile();
-		
+		//pft.processTestDeviceFile();
 		// Close database connection
 		dbc.closeDB();
 	}

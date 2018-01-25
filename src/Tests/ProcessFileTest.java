@@ -39,9 +39,9 @@ public class ProcessFileTest {
 	 * Test case to process device file to device tables
 	 */
 	public void processTestDeviceFile() {
-		DBConnectUtil dbc = new DBConnectUtil();
+		DBConnectUtil dbc = new DBConnectUtil(1);
 		Connection conn = dbc.connectDB();
-		File file = new File("devices1.txt");
+		File file = new File("arp_request.txt");
 		FileInbound inb = new FileInbound(file, conn);
 		FileProcessor dp = new FileProcessor(inb, conn);
 		dp.processDeviceFile();
