@@ -2,7 +2,10 @@ import Tests.FileKeyTest;
 import Tests.PacketInsertTest;
 import Tests.ProcessFileTest;
 import Util.DBConnectUtil;
+import Util.FileInbound;
+import Util.FileProcessor;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -14,14 +17,42 @@ import java.sql.Connection;
  */
 public class Driver {
 
+	/**
+	 * Driver for Packet_ETL_Loader
+	 * @param args input arguments
+	 * @throws Exception 
+	 */
 	public static void main(String[] args) {
-		// Open database connection to TST
-		DBConnectUtil dbc = new DBConnectUtil();
-		Connection conn = dbc.connectDB();
+
+		/*
+		 * args[0] ==> File to load
+		 * args[1] ==> Execution environment: 1 = local dev
+		 * 									  2 = remote (rpi)
+		 * args[2] ==> Process packet load OR device load: "Packet" = packet load
+		 * 												   "Device" = device load
+		 */
 		
-		PacketInsertTest test = new PacketInsertTest(conn);
-		FileKeyTest fKTest = new FileKeyTest(conn);
-		ProcessFileTest pft = new ProcessFileTest(conn);
+		// Open database connection to TST
+		
+		int executionEnvironment = Integer.parseInt(args[1]);
+		String loadSpec = args[2];
+		DBConnectUtil dbc = new DBConnectUtil(executionEnvironment);
+		Connection conn = dbc.connectDB();
+		File file = new File(args[0]);
+	
+		FileInbound inb = new FileInbound(file, conn);
+		FileProcessor fp = new FileProcessor(inb, conn);
+		
+		if(loadSpec.equals("Packet")) {
+			fp.processFile();
+		} else if(loadSpec.equals("Device")) {
+			fp.processDeviceFile();
+		} 		
+		
+		
+		//PacketInsertTest test = new PacketInsertTest(conn);
+		//FileKeyTest fKTest = new FileKeyTest(conn);
+		//ProcessFileTest pft = new ProcessFileTest(conn);
 		//*********************************
 		//Uncomment to initiate test persistence cases
 		//*********************************
@@ -40,8 +71,8 @@ public class Driver {
 		//*********************************
 		//Uncomment to initiate file processing test case
 		//*********************************
-		pft.processTestFile();
-		
+		//pft.processTestFile();
+		//pft.processTestDeviceFile();
 		// Close database connection
 		dbc.closeDB();
 	}

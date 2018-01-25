@@ -1,0 +1,6 @@
+nathan-Lenovo-G570 (192.168.1.77) at 0c:ee:e6:c7:2f:0f [ether] on wlan0
+router.asus.com (192.168.1.1) at 70:4d:7b:8d:6a:0c [ether] on wlan0
+iPhone (192.168.1.58) at 24:f0:94:02:95:02 [ether] on wlan0
+nathan-Lenovo-G570 (192.168.1.77) at 0c:ee:e6:c7:2f:0f [ether] on eth0
+router.asus.com (192.168.1.1) at 70:4d:7b:8d:6a:0c [ether] on eth0
+Poopy_Face_computer (192.156.12.2) at 48:4d:4d:4d:0d [ether] on eth0

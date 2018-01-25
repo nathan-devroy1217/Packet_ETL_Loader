@@ -30,15 +30,10 @@ public class FileProcessor {
 	
 	/** FileInbound object containing file info and file itself */
 	private FileInbound inb;
-	
-	/** ArrayList of PacketImpl objects */
-	private ArrayList<PacketImpl> packetList;
-	
-	/** ArrayList of DeviceImpl objects */
-	private ArrayList<DeviceImpl> deviceList;
-	
+		
 	/** DB connection */
 	private Connection conn;
+	
 	/**
 	 * Constructor for FileProcessor
 	 * @param fileInb FileInbound object containing file info and file itself
@@ -55,7 +50,6 @@ public class FileProcessor {
 	 */
 	public void processDeviceFile() {
 		BufferedReader bufferedReader = null;
-		deviceList = new ArrayList<DeviceImpl>();
 		try {
 			inb.updateFileProcessing();
 			FileReader fileReader = new FileReader(file);
@@ -63,10 +57,12 @@ public class FileProcessor {
 			
 			while((line = bufferedReader.readLine()) != null) {
 				//Add processed device objects to deviceList
-				DeviceProcessor dp = new DeviceProcessor(inb, line.toString());
+				DeviceProcessor dp = new DeviceProcessor(inb, line.toString(), conn);
 				DeviceImpl deviceLine = dp.processDevice();	
-				PersistDevice persistDevice = new PersistDevice(deviceLine, conn);
-				persistDevice.persist();
+				if(deviceLine != null) {
+					PersistDevice persistDevice = new PersistDevice(deviceLine, conn);
+					persistDevice.persist();
+				}
 			}
 			//Update file_info table for successful load
 			inb.updateFileSuccess();
@@ -85,7 +81,6 @@ public class FileProcessor {
 	 */
 	public void processFile() {
 		BufferedReader bufferedReader = null;
-		packetList = new ArrayList<PacketImpl>();
 		try {
 			//Start by setting file status as "in processing"
 			inb.updateFileProcessing();
