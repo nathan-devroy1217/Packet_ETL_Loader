@@ -3,18 +3,14 @@ package Util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import packet_fields.Packet;
-import packet_fields.Impl.PacketImpl;
 
 public class DBConnectUtil {
 
 	/** JDBC connection string */
-	private final String url = HomeNetworkConstants.url;
+	private String url;
 
 	/** User name for DB connection */
-	private final String user = HomeNetworkConstants.user;
+	private String user;
 
 	/** Password for DB connection */
 	private final String password = HomeNetworkConstants.password;
@@ -22,8 +18,14 @@ public class DBConnectUtil {
 	/** DB connection */
 	private Connection conn = null;
 	
-	public DBConnectUtil() {
-		
+	public DBConnectUtil(int exEnvironment) {
+		if(exEnvironment == 1) {
+			url = HomeNetworkConstants.urlLocal;
+			user = HomeNetworkConstants.localUser;
+		} else if(exEnvironment == 2) {
+			url = HomeNetworkConstants.urlRemote;
+			user = HomeNetworkConstants.remoteUser;
+		}
 	}
 	
 	public Connection connectDB() {
