@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import packet_fields.Impl.DeviceImpl;
 import packet_fields.Impl.PacketImpl;
 
 /**
@@ -33,6 +34,9 @@ public class FileProcessor {
 	/** ArrayList of PacketImpl objects */
 	private ArrayList<PacketImpl> packetList;
 	
+	/** ArrayList of DeviceImpl objects */
+	private ArrayList<DeviceImpl> deviceList;
+	
 	/** DB connection */
 	private Connection conn;
 	/**
@@ -46,6 +50,36 @@ public class FileProcessor {
 		this.conn = conn;
 	}
 	
+	/**
+	 * Process device file
+	 */
+	public void processDeviceFile() {
+		BufferedReader bufferedReader = null;
+		deviceList = new ArrayList<DeviceImpl>();
+		try {
+			inb.updateFileProcessing();
+			FileReader fileReader = new FileReader(file);
+			bufferedReader = new BufferedReader(fileReader);
+			
+			while((line = bufferedReader.readLine()) != null) {
+				//Add processed device objects to deviceList
+				DeviceProcessor dp = new DeviceProcessor(inb, line.toString());
+				DeviceImpl deviceLine = dp.processDevice();	
+				PersistDevice persistDevice = new PersistDevice(deviceLine, conn);
+				persistDevice.persist();
+			}
+			//Update file_info table for successful load
+			inb.updateFileSuccess();
+			bufferedReader.close();
+		} catch (FileNotFoundException ex) {
+			fileErrors = new PersistFileErrors(inb);
+			fileErrors.populateErrorIntoTable(inb, ex.toString());
+		} catch (IOException ex) {
+			fileErrors = new PersistFileErrors(inb);
+			fileErrors.populateErrorIntoTable(inb, ex.toString());
+		}
+	}
+
 	/**
 	 * Processes file along with inbound processing
 	 */
@@ -61,18 +95,12 @@ public class FileProcessor {
 			while((line = bufferedReader.readLine()) != null) {
 				//Add processed packet objects to packetList
 				PacketProcessor pp = new PacketProcessor(inb, line.toString());
-				//packetList.add(pp.processPacket());
 				PacketImpl procPacket = pp.processPacket();
-				//PersistPacket persistPacket = new PersistPacket(packetList, conn);
 				PersistPacket persistPacket = new PersistPacket(procPacket, conn);
 				persistPacket.persist();
 				
 			}
-			
-			//Once all packets processed, add to DB
-			//PersistPacket persistPacket = new PersistPacket(packetList, conn);
-			//persistPacket.persist();
-			
+					
 			//Update file_info table for successful load
 			inb.updateFileSuccess();
 			bufferedReader.close();

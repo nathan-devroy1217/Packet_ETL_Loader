@@ -3,6 +3,8 @@ package Tests;
 import java.io.File;
 import java.sql.Connection;
 
+import Util.DBConnectUtil;
+import Util.DeviceProcessor;
 import Util.FileInbound;
 import Util.FileProcessor;
 
@@ -33,5 +35,16 @@ public class ProcessFileTest {
 		fp.processFile();
 	}
 	
-	
+	/**
+	 * Test case to process device file to device tables
+	 */
+	public void processTestDeviceFile() {
+		DBConnectUtil dbc = new DBConnectUtil();
+		Connection conn = dbc.connectDB();
+		File file = new File("devices1.txt");
+		FileInbound inb = new FileInbound(file, conn);
+		FileProcessor dp = new FileProcessor(inb, conn);
+		dp.processDeviceFile();
+		dbc.closeDB();
+	}
 }
