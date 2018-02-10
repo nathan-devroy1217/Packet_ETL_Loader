@@ -11,6 +11,19 @@ public class HomeNetworkConstants {
 	public static final String localUser = "nathan";
 	public static final String remoteUser = "root";
 	public static final String password = "Elijah1027";
-	
-	
+	private static String toDateTime;
+	private static String fromDateTime;
+	public static final String packetGetQuery = 
+			"select \n" + 
+			"packet.access_dttm, \n" + 
+			"device.device_name,\n" + 
+			"packet.src_ip, \n" + 
+			"packet.resolved_url \n" + 
+			"from packet \n" + 
+			"inner join device \n" + 
+			"on (device.ip_address = packet.src_ip) \n" +
+			"order by access_dttm desc \n" +
+			"where access_dttm between \n" + 
+			fromDateTime + " and " + toDateTime + "\n" +
+			" limit 4000;";
 }
